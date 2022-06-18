@@ -17,7 +17,7 @@ def display_stats():
             print(f"{key}: {value}")
     print("------------------")
     
-def is_game_over(hp):
+def is_gameover(hp):
     if hp < 0:
         return True
     else: return False
@@ -56,7 +56,7 @@ def make_senario(id, messages_early: list, choices: dict = None, messages_later:
     
     if messages_later is None:
         _ = input()
-        return glob_choice, is_game_over(stats["hp"])
+        return glob_choice, is_gameover(stats["hp"])
     elif type(messages_later) == list:
         for mes in messages_later:
             print(f"{mes}")
@@ -64,20 +64,20 @@ def make_senario(id, messages_early: list, choices: dict = None, messages_later:
         print(f"{messages_later}")
     
     _ = input()
-    return glob_choice, is_game_over(stats["hp"])
+    return glob_choice, is_gameover(stats["hp"])
     
 
 if __name__ == "__main__":
     
-    gameover = False
+    IsGameOver = False
     glob_choice = 0
     
     with open('senario.json', errors="ignore", encoding="utf-8") as f:
             senarios = json.load(f)
     
-    while not gameover: 
+    while not IsGameOver: 
         
         senario = senarios[f"{glob_choice}"]
-        glob_choice, gameover = make_senario(glob_choice, senario["mes_e"], senario["choice"])
+        glob_choice, IsGameOver = make_senario(glob_choice, senario["mes_e"], senario["choice"])
         
-        print(f"senario: {glob_choice}, GameOver?: {gameover}")
+        print(f"Current Senario: {glob_choice}, IsGameOver: {IsGameOver}")
